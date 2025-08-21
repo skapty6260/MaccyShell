@@ -31,30 +31,42 @@ Item {
             anchors.rightMargin: 30
             spacing: 5
 
-            RowLayout {
+            // Unexpanded
+            MouseArea {
+                id: mouseArea
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.topMargin: 18
                 height: 60
-
-                Text {
-                    color: "#fff"
-                    text: mainText
-                    font.pixelSize: 16
-                    font.weight: Font.Bold
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignLeft
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    expanded = !expanded
                 }
 
-                Text {
-                    color: "#fff"
-                    text: expanded ? "CLOSE" : "OPEN"
-                    font.pixelSize: 16
-                    Layout.alignment: Qt.AlignRight
+                RowLayout {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+
+                    Text {
+                        color: "#fff"
+                        text: mainText
+                        font.pixelSize: 16
+                        font.weight: Font.Bold
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignLeft
+                    }
+
+                    Text {
+                        color: "#fff"
+                        text: expanded ? "CLOSE" : "OPEN"
+                        font.pixelSize: 16
+                        Layout.alignment: Qt.AlignRight
+                    }
                 }
             }
-
+            
+            // Expanded
             ListView {
                 id: optionsList
                 anchors.fill: parent
@@ -70,12 +82,75 @@ Item {
                 spacing: 20
 
                 delegate: Item {
-                    Text {
-                        wrapMode: Text.WordWrap
-                        font.pixelSize: 16
-                        color: "#fff"
-                        font.weight: Font.Semibold
-                        text: modelData.label
+                    Loader {
+                        id: itemLoader
+                        sourceComponent: modelData.type === 'slider' ? sliderOption : modelData.type === 'dropdown' ? dropdownOption : infoOption
+                    }
+
+                    Binding {
+                        target: itemLoader.item
+                        property: "modelData"
+                        value: modelData
+                    }
+                }
+
+                Component {
+                    id: infoOption
+
+                    Item {
+                        property var modelData: null
+
+                        RowLayout {
+                            Text {
+                                wrapMode: Text.WordWrap
+                                font.pixelSize: 16
+                                color: "#fff"
+                                font.weight: Font.Bold
+                                text: modelData.label
+                            }
+
+                            Text {
+                                wrapMode: Text.WordWrap
+                                font.pixelSize: 16
+                                color: "#fff"
+                                font.weight: Font.Medium
+                                text: modelData.value
+                            }
+                        }
+                    }
+                }
+
+                // TODO: Change to list selector
+                Component {
+                    id: dropdownOption
+
+                    Item {
+                        property var modelData: null
+
+                        Dropdown {
+                        }
+                    }
+                }
+
+                Component {
+                    id: sliderOption
+
+                    RowLayout {
+                        anchors.fill: parent
+
+                        property var modelData: null
+
+                        Text {
+                            wrapMode: Text.WordWrap
+                            font.pixelSize: 16
+                            color: "#fff"
+                            font.weight: Font.Bold
+                            text: modelData.label
+                            Layout.alignment: Qt.AlignVCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        Slider {}
                     }
                 }
             }
@@ -83,15 +158,6 @@ Item {
 
         Behavior on height {
             NumberAnimation { duration: animationDuration; easing.type: Easing.InOutQuad }
-        }
-
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            onClicked: {
-                expanded = !expanded
-            }
         }
     }
 

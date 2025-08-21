@@ -28,7 +28,6 @@ Singleton {
 
     function parseMonitorOutput(output: string): void {
         const lines = output.trim().split("\n");
-        console.log(JSON.stringify(lines[1]))
         const monitorList = [];
 
         let currentMonitor = {};

@@ -11,11 +11,11 @@ Item {
 
     property int selectedMonitor: 0
     property var monitors: Hyprland.monitorsList
-    property int overallExpandedArea: (deviceInfo.expandedHeight + 10) + (availableModes.expandedHeight + 10) + (orientationAndRotation.expandedHeight + 10) + 60 // 60 is margins for y axis
+    property int overallExpandedArea: (deviceInfo.expandedHeight + 10) + (bigOptions.expandedHeight + 10) + 60 // 60 is margins for y axis
 
     Rectangle {
         id: page
-        color: "#e0000000"
+        color: ThemeConfig.windowBackground //"#e0000000"
         anchors.fill: parent
         anchors.leftMargin: 200
 
@@ -101,36 +101,76 @@ Item {
                     id: columnLayout
                     anchors.fill: parent
                     anchors.margins: 30
+                    spacing: 40
 
+                    RowLayout {
+                        id: upperRow
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        height: 80
+                        spacing: 50
+
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.top: parent.top
+                            height: parent.height
+                            width: parent.width
+
+                            color: "red"
+                        }
+
+                        // Item {
+                        //     height: parent.height
+
+                        //     RowLayout {
+                        //         anchors.fill: parent
+
+                        //         property var modelData: null
+
+                        //         Text {
+                        //             wrapMode: Text.WordWrap
+                        //             font.pixelSize: 16
+                        //             color: "#fff"
+                        //             font.weight: Font.Bold
+                        //             text: "Brightness"
+                        //             Layout.alignment: Qt.AlignVCenter
+                        //             verticalAlignment: Text.AlignVCenter
+                        //         }
+
+                        //         Slider {}
+                        //     }
+                        // }
+                    }
+
+                    // Расширенные настройки
                     ExpandingBlock {
                         id: deviceInfo
                         
                         anchors.top: parent.top
+                        anchors.topMargin: upperRow.height + 40
                         mainText: "Device info"
                         options: [
-                            { label: "Monitor Index: "+selectedMonitor, type: "info" },
-                            { label: "Name: "+monitors[selectedMonitor].name, type: "info" },
-                            { label: "Description: "+monitors[selectedMonitor].description, type: "info" },
+                            { label: "Monitor Index: ", value: selectedMonitor, type: "info" },
+                            { label: "Name: ", value: monitors[selectedMonitor].name, type: "info" },
+                            { label: "Description: ", value: monitors[selectedMonitor].description, type: "info" },
+                            { label: "Color format: ", value: JSON.stringify(monitors[selectedMonitor].currentFormat), type: "info" },
+                            { label: "Selected Mode: ", value: JSON.stringify(monitors[selectedMonitor].selectedMode), type: "info" },
                         ]
+                        expandedHeight: 200
                     } 
 
                     ExpandingBlock {
-                        id: availableModes
-                        mainText: "Available modes"
+                        id: bigOptions
+                        mainText: "Graphics"
                         options: [
-                            { label: "Selected: "+JSON.stringify(monitors[selectedMonitor].selectedMode), type: "info" },
+                            { label: "Selected Mode: ", value: JSON.stringify(monitors[selectedMonitor].selectedMode), type: "info" },
+                            { label: "Mode: ", type: "dropdown" },
+                            { label: "Brightness: ", value: "80%", type: "slider" },
                         ]
                         previous: deviceInfo
-                    } 
-
-                    ExpandingBlock {
-                        id: orientationAndRotation
                         expandedHeight: 350
-                        mainText: "Orientation & Rotation"
-                        options: [
-                            { label: "Selected: "+JSON.stringify(monitors[selectedMonitor].selectedMode), type: "info" },
-                        ]
-                        previous: availableModes
                     } 
 
                     // next blocks
@@ -139,3 +179,10 @@ Item {
         }
     }
 }
+
+// Блоки
+/*
+    1. Информация о мониторе
+    2. Настройка изображения (Графика, режим монитора герцовка и качество, яркость, цветовой режим)
+    3. Настройка возможностей (Повороты, ориентация, мирроринг, тиринг)
+*/

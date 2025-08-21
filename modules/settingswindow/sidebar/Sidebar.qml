@@ -1,3 +1,5 @@
+import qs.services
+
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
@@ -10,7 +12,7 @@ Rectangle {
 
     property string bgColor: "#2a2a2a"
 
-    color: sidebar.bgColor
+    color: ThemeConfig.windowBackground
 
     SearchBar{
         id: searchbar
@@ -36,7 +38,7 @@ Rectangle {
 
             SidebarDelimeter{ text: "system" }
             SidebarButton{ page: "Displays" }
-            SidebarButton{ page: "Pipewire (Audio)" }
+            SidebarButton{ page: "Audio" }
             SidebarButton{ page: "Devices" }
             SidebarButton{ page: "Autostart" }
             SidebarButton{ page: "Keybinds" }

@@ -1,3 +1,5 @@
+import qs.services
+
 import Quickshell
 import Quickshell.Io
 import QtQuick
@@ -8,6 +10,7 @@ PanelWindow {
     left: true
     right: true
   }
+  color: ThemeConfig.windowBackground
 
   implicitHeight: 30
 
