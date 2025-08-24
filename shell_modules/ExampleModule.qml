@@ -10,7 +10,7 @@ PanelWindow {
     left: true
     right: true
   }
-  color: ThemeConfig.windowBackground
+  color: "lightblue"
 
   implicitHeight: 30
 

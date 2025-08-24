@@ -5,6 +5,7 @@ import QtQuick
 Button {
     id: sidebar_btn
     property string page: "system"
+    property string iconName: ""
 
     anchors.left: parent.left
     anchors.right: parent.right
