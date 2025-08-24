@@ -1,4 +1,5 @@
 import qs.services
+import qs.modules.common
 
 import Quickshell
 import Quickshell.Io
@@ -10,7 +11,7 @@ PanelWindow {
     left: true
     right: true
   }
-  color: "lightblue"
+  color: Appearance.ms_colors.ms_background
 
   implicitHeight: 30
 

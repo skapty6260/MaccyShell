@@ -7,9 +7,6 @@ import Quickshell.Hyprland
 import Quickshell.Io
 
 Singleton {
-    // Включенные модули
-    property var enabledModules: {children: []}
-
     // Props like screen lock toggled and others
     property real screenZoom: 1
     onScreenZoomChanged: {
