@@ -13,6 +13,7 @@ import QtCore
 import Qt.labs.folderlistmodel
 
 import qs.services
+import qs.modules.common
 
 ShellRoot {
     id: shellRoot
@@ -22,7 +23,8 @@ ShellRoot {
     property int reloadTrigger: 0
 
     Component.onCompleted: {
-        // Force start singletons
+        console.log(JSON.stringify(Appearance.colors))
+        ThemeLoader.reapplyTheme()
     }
 
     FolderListModel {

@@ -11,7 +11,7 @@ PanelWindow {
     left: true
     right: true
   }
-  color: Appearance.ms_colors.ms_background
+  color: Appearance.colors.background
 
   implicitHeight: 30
 

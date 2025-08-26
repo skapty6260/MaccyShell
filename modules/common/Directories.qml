@@ -15,4 +15,12 @@ Singleton {
 
     property string assetsPath: Quickshell.shellPath("assets")
     property string generatedThemePath: FileUtils.trimFileProtocol(`${Directories.state}/user/generated/colors.json`)
+    property string themesPath: FileUtils.trimFileProtocol(`${Directories.shellConfigDir}/themes`)
+    property string shellConfigDir: FileUtils.trimFileProtocol(`${Directories.config}/maccy-shell`)
+    property string shellConfigPath: `${Directories.shellConfigDir}/config.json`
+
+    Component.onCompleted: {
+        Quickshell.execDetached(["mkdir", "-p", `${shellConfigDir}`])
+        Quickshell.execDetached(["mkdir", "-p", `${themesPath}`])
+    }
 }
