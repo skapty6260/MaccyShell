@@ -20,7 +20,7 @@ Singleton {
     colors: QtObject {
         property bool blur: false
         property bool transparent: false
-        property real bgTransparency: 0
+        property real bgOpacity: 1
         property bool darkmode: false
         property bool outlines: true
         property color outline: "#94b7ff"

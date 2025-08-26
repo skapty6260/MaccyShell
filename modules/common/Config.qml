@@ -71,6 +71,19 @@ Singleton {
             property JsonObject hacks: JsonObject {
                 property int arbitraryRaceConditionDelay: 300
             }
+
+            property JsonObject background: JsonObject {
+                property string wallpaperPath: ""
+                property string thumbnailPath: ""
+                property JsonObject parallax: JsonObject {
+                    property bool vertical: false
+                    property bool enableWorkspace: true
+                    property real workspaceZoom: 1.07 // Relative to your screen, not wallpaper size
+                    property bool enableSidebar: true
+                }
+                property string mantra: ""
+                property bool hideWhenFullscreen: true
+            }
         }
     }
 }

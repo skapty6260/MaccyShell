@@ -9,6 +9,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Window
+import Quickshell.Hyprland
+import QtQuick.Effects
 import Quickshell
 
 import qs.modules.common
@@ -16,6 +18,7 @@ import qs.modules.common.widgets
 
 ApplicationWindow {
     id: root
+    HyprlandWindow.opacity: 0.2
 
     property var pages: [
         {
@@ -40,12 +43,15 @@ ApplicationWindow {
 
     width: 1100
     height: 750
-    color: Appearance.colors.background
+    color: "transparent"
 
     ColumnLayout {
-        anchors {
-            fill: parent
-            margins: contentPadding
+        anchors.fill: parent
+
+        Rectangle {
+            anchors.fill: parent
+            color: "#000"
+            opacity: 0.5
         }
 
         // Titlebar
@@ -63,7 +69,7 @@ ApplicationWindow {
                     verticalCenter: parent.verticalCenter
                     leftMargin: 12
                 }
-                color: Appearance.colors.colOnLayer0
+                color: "#fff"
                 text: "Settings"
                 font.pixelSize: Appearance.font.pixelSize.title
                 font.family: Appearance.font.family.title

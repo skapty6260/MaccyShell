@@ -15,8 +15,8 @@ Text {
         family: Appearance?.font.family.main ?? "sans-serif"
         pixelSize: Appearance?.font.pixelSize.small ?? 15
     }
-    color: Appearance?.ms_colors.ms_onBackground ?? "black"
-    linkColor: Appearance?.ms_colors.ms_primary
+    color: Appearance.colors.text
+    linkColor: Appearance.colors.active
 
     component Anim: NumberAnimation {
         target: root
